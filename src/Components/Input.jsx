@@ -5,9 +5,9 @@ const Input = () => {
     const handleFocus = () => {
         referenciaInput.current.focus();
     }
-    const handleBlur = () => {
+   /*  const handleBlur = () => {
         referenciaInput.current.blur();
-    }
+    } */
     return (
         <div>
             <input placeholder='buscar' ref={referenciaInput} />

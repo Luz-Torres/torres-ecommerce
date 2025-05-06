@@ -1,16 +1,18 @@
-const Home = ({ greeting }) => {
+import Button from "../Button";
+import { Link } from "react-router-dom";
+import Layout from "../Layout/Layout";
+const Home = () => {
     return (
-        <section className="h-[80vh] flex items-center justify-center bg-gradient-to-r from-yellow-100 via-white to-indigo-100 rounded-xl shadow-lg px-6 text-center">
-            <div>
-                <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-                    {greeting}
-                </h1>
-                <p className="text-gray-600 text-lg md:text-xl">
-                ¿Listo para girar tu mundo y expandir tu mente?🌌
-                </p>
-            </div>
-        </section>
+        <Layout>
+            <h1 className="text-6xl font-extrabold mb-4 text-center">Bienvenido a tu tienda favorita</h1>
+            <h3 className="text-xl mb-8 text-center max-w-xl">
+                Cubos rubik, libros, juegos . Encontrás lo que necesitás
+            </h3>
+            <Button>
+                <Link to="/products">Comprar</Link>
+            </Button>
+        </Layout>
     );
 };
 
-export default Home
+export default Home;

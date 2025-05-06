@@ -14,10 +14,8 @@ const ItemListContainer = () => {
                 console.error(err);
             });
     }, []);
-
     return (
-        <div className="container mx-auto p-4">
-            <h1 className="text-3xl font-bold mb-4">Products</h1>
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6">
             <ItemList products={products} />
         </div>
     );

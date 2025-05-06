@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Button from './Button';
 
 const ItemCount = () => {
 
@@ -9,26 +10,24 @@ const ItemCount = () => {
         if (count > 0) setCount(count - 1);
     };
     return (
-        <div className="flex w-fit items-center gap-1 bg-white px-6 py-4 rounded-xl">
-            <button
+        <div className=" flex w-fit items-center gap-1 px-6 py-4 rounded-xl">
+            <Button
                 onClick={decrement} disabled={count === 0}
                 className={
-                    `text-2xl font-bold w-10 h-10 border rounded-lg transition 
+                    `w-10 h-10 border border-gray-300
                     ${count === 0
-                    ? 'text-gray-400 border-gray-200 cursor-not-allowed bg-gray-100'
-                    : 'text-gray-700 border-gray-300 hover:bg-gray-100'}
+                    ? 'text-gray-400  cursor-not-allowed bg-gray-100'
+                    : 'text-gray-700  hover:bg-gray-100'}
                 `}
-                /* className="text-2xl font-bold text-gray-700 w-10 h-10 border border-gray-300 rounded-lg hover:bg-gray-100 transition"
-             */>
-                –
-            </button>
+            >-</Button>
+
             <span className="text-3xl font-semibold text-gray-800 w-10 text-center select-none">{count}</span>
-            <button
+            <Button
                 onClick={increment}
-                className="text-2xl font-bold text-gray-700 w-10 h-10 border border-gray-300 rounded-lg hover:bg-gray-100 transition"
+                className="w-10 h-10 border border-gray-300"
             >
                 +
-            </button>
+            </Button>
         </div>
     );
 }

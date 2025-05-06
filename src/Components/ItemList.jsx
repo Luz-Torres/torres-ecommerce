@@ -1,5 +1,5 @@
 import Item from './Item';
-
+import Loader from './Loader';
 const ItemList = ({ products }) => {
     return (
         <div className="flex flex-wrap justify-center">
@@ -8,7 +8,7 @@ const ItemList = ({ products }) => {
                     <Item key={product.id} product={product} />
                 ))
             ) : (
-                <p>No hay productos</p>
+                <Loader/>
             )}
         </div>
     );

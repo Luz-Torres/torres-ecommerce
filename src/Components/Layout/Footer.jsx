@@ -1,7 +1,7 @@
 import { FaFacebook, FaInstagram, FaGithub } from "react-icons/fa";
 const Footer = () => {
     return (
-        <footer className="bg-gray-800 text-white py-8 ">
+        <footer className="bg-gray-800 text-white py-6 ">
             <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
                 <p className="text-m text-gray-300">
                     © {new Date().getFullYear()} Rubik Haus. Todos los derechos reservados
