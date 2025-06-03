@@ -2,34 +2,39 @@ import { useState } from 'react';
 import Button from './Button';
 
 const ItemCount = () => {
-
     const [count, setCount] = useState(0);
-    
+
     const increment = () => setCount(count + 1);
     const decrement = () => {
         if (count > 0) setCount(count - 1);
     };
-    return (
-        <div className=" flex w-fit items-center gap-1 px-6 py-4 rounded-xl">
-            <Button
-                onClick={decrement} disabled={count === 0}
-                className={
-                    `w-10 h-10 border border-gray-300
-                    ${count === 0
-                    ? 'text-gray-400  cursor-not-allowed bg-gray-100'
-                    : 'text-gray-700  hover:bg-gray-100'}
-                `}
-            >-</Button>
 
-            <span className="text-3xl font-semibold text-gray-800 w-10 text-center select-none">{count}</span>
+    return (
+        <div className="flex w-fit items-center gap-3 px-6 py-4 rounded-2xl">
+            <Button
+                onClick={decrement}
+                disabled={count === 0}
+                className={`w-10 h-10 rounded-full border  text-xl font-bold transition-all duration-200
+                    ${count === 0
+                        ? 'text-gray-400 bg-gray-100 cursor-not-allowed'
+                        : 'text-gray-700 hover:bg-gray-100 hover:scale-105'}
+                `}
+            >
+                –
+            </Button>
+
+            <span className="text-2xl font-semibold text-white w-12 text-center select-none">
+                {count}
+            </span>
+
             <Button
                 onClick={increment}
-                className="w-10 h-10 border border-gray-300"
+                className="w-8 h-10 rounded-full border  text-xl font-bold text-gray-700 hover:bg-gray-100 hover:scale-105 transition-all duration-200"
             >
                 +
             </Button>
         </div>
     );
-}
+};
 
-export default ItemCount
+export default ItemCount;

@@ -13,7 +13,7 @@ const ChatWidget = () => {
 
     return (
         <section
-            aria-label="Chat de consultas"
+            aria-label="Chat de consultas"i
             className="fixed bottom-6 right-6 z-50"
         >
             {isChatOpen && (

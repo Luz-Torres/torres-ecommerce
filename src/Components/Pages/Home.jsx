@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Layout from "../Layout/Layout";
 const Home = () => {
     return (
-        <Layout>
+        <Layout className='h-[83vh]'>
             <h1 className="text-6xl font-extrabold mb-4 text-center">Bienvenido a tu tienda favorita</h1>
             <h3 className="text-xl mb-8 text-center max-w-xl">
                 Cubos rubik, libros, juegos . Encontrás lo que necesitás

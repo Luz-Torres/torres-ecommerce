@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 const Item = ({ product }) => {
     return (
-        <article className="flex flex-col items-center justify-between bg-white shadow-lg rounded-2xl p-4 m-4 w-full max-w-sm transition-transform duration-300 hover:scale-105">
+        <article className="flex flex-col items-center justify-between bg-slate-800 shadow-lg rounded-2xl p-4 m-4 w-full max-w-sm transition-transform duration-300 hover:scale-105">
             <img
                 src={product.image}
                 alt={product.name}

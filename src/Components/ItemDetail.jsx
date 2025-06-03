@@ -1,67 +1,68 @@
-import { useEffect,useState } from 'react'
-import{ useParams} from 'react-router-dom';
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
 import { getProductById } from '../utils/getProducts';
-
+import Loader from './Loader';
+import Layout from './Layout/Layout';
 import Button from './Button';
-
-
+import ItemCount from './ItemCount';
 const ItemDetail = () => {
-    const {id} = useParams();
-    const[product, setProduct] = useState();
-
+    const { id } = useParams();
+    const [product, setProduct] = useState();
+    
     useEffect(() => {
         getProductById(id)
             .then((product) => {
                 setProduct(product);
             })
             .catch((err) => {
-                console.error('Error al obtener el producto:',err);
+                console.error('Error al obtener el producto:', err);
             });
-    },[id]);
-    
+    }, [id]);
 
-        if (!product) {
-            return (
-                <section className="text-center p-8" role="status" aria-live="polite">
-                    Cargando...
-                </section>
-            );
-        }
 
-        const { name, description, price, image } = product;
-    
+    if (!product) {
         return (
-            <main className="max-w-4xl mx-auto p-8">
-                <article className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row">
-                    <figure className="md:w-1/2">
+            <Loader/>
+        );
+    }
+
+    const { name, description, price, image } = product;
+
+    return (
+        <Layout className="h-[83vh]">
+            <main className="flex justify-center p-6">
+                <article
+                    role="dialog"
+                    aria-modal="true"
+                    className="bg-slate-800 shadow-xl rounded-xl p-6 w-80 sm:w-96 mb-3 animate-fade-in text-white"
+                >
+                    <figure className="mb-4 rounded-lg overflow-hidden">
                         <img
-                            className="h-64 w-full object-cover md:h-full"
                             src={image}
                             alt={name}
+                            className="w-full h-48 object-cover"
                         />
-                        <figcaption className="sr-only">{name}</figcaption>
                     </figure>
-    
-                    <section className="p-6 flex flex-col justify-between md:w-1/2">
-                        <header>
-                            <h1 className="text-2xl font-bold mb-2">{name}</h1>
-                        </header>
-    
-                        <p className="text-gray-600 mb-4">{description}</p>
-    
-                        <footer className="flex items-center justify-between mt-4">
-                            <span className="text-xl font-semibold text-green-600">
-                                ${price}
-                            </span>
-                            <Button
-                                aria-label={`Agregar ${name} al carrito`}
-                            >
-                                Agregar al carrito
-                            </Button>
-                        </footer>
-                    </section>
+
+                    <header className="mb-3">
+                        <h1 className="text-xl font-bold">{name}</h1>
+                    </header>
+
+                    <p className="text-gray-300 mb-5">{description}</p>
+
+                    <footer className="flex flex-col gap-4">
+                        <span className="text-2xl font-semibold text-green-400">${price}</span>
+                        <ItemCount/>
+                        <Button
+                            aria-label={`Agregar ${name} al carrito`}
+                            className="w-full bg-green-600 hover:bg-green-700 transition"
+                        >
+                            Agregar al carrito
+                        </Button>
+                    </footer>
                 </article>
             </main>
-        );
+        </Layout>
+    );
 }
 export default ItemDetail;
