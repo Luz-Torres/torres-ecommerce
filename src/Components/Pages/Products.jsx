@@ -1,30 +1,29 @@
 import { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 import Layout from '../Layout/Layout';
 import ItemListContainer from '../../Components/ItemListContainer';
-import Filter from './Filter';
+import Filter from '../../Components/Filter';
 import { getProductsByCategory } from '../../utils/getProducts';
 
 const Products = () => {
-    const [selectedCategory, setSelectedCategory] = useState('todos');
+    const { categoryId } = useParams();
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        getProductsByCategory(selectedCategory).then((res) => {
+        getProductsByCategory(categoryId || 'todos').then((res) => {
             setProducts(res);
         });
-    }, [selectedCategory]);
+    }, [categoryId]);
 
     return (
         <Layout>
             <h1 className="text-3xl text-center font-bold mt-5 mb-5">Productos</h1>
-
-            <Filter
-                setSelectedCategory={setSelectedCategory}
-                selectedCategory={selectedCategory}
-            />
-
+            <Filter selectedCategory={categoryId || 'todos'} />
             <main>
-                <ItemListContainer products={products} />
+                <ItemListContainer 
+                    products={products} 
+                    selectedCategory={categoryId || 'todos'} 
+                />
             </main>
         </Layout>
     );

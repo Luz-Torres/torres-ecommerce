@@ -1,14 +1,19 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getProductById } from '../utils/getProducts';
 import Loader from './Loader';
 import Layout from './Layout/Layout';
 import Button from './Button';
 import ItemCount from './ItemCount';
+import { useCart } from '../Context/CartContext'; 
+
 const ItemDetail = () => {
     const { id } = useParams();
     const [product, setProduct] = useState();
-    
+    const [quantity, setQuantity] = useState(1); 
+
+    const { addToCart } = useCart(); 
+
     useEffect(() => {
         getProductById(id)
             .then((product) => {
@@ -19,14 +24,15 @@ const ItemDetail = () => {
             });
     }, [id]);
 
-
     if (!product) {
-        return (
-            <Loader/>
-        );
+        return <Loader />;
     }
 
     const { name, description, price, image } = product;
+
+    const handleAddToCart = () => {
+        addToCart(product, quantity);
+    };
 
     return (
         <Layout className="h-[83vh]">
@@ -52,10 +58,13 @@ const ItemDetail = () => {
 
                     <footer className="flex flex-col gap-4">
                         <span className="text-2xl font-semibold text-green-400">${price}</span>
-                        <ItemCount/>
+
+                        <ItemCount count={quantity} setCount={setQuantity} />
+
                         <Button
                             aria-label={`Agregar ${name} al carrito`}
                             className="w-full bg-green-600 hover:bg-green-700 transition"
+                            onClick={handleAddToCart}
                         >
                             Agregar al carrito
                         </Button>
@@ -64,5 +73,6 @@ const ItemDetail = () => {
             </main>
         </Layout>
     );
-}
+};
+
 export default ItemDetail;

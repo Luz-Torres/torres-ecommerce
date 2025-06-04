@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from './Components/Layout/Navbar';
 import Footer from './Components/Layout/Footer';
 
@@ -10,27 +10,31 @@ import NotFound from './Components/Pages/NotFound';
 
 import ChatWidget from './Components/ChatWidget';
 import ItemDetailContainer from "./Components/ItemDetailContainer";
-
-/* import ItemList from './Components/ItemList';
-import ItemListContainer from "./Components/ItemListContainer"; */
+import { CartProvider } from "./Context/CartContext";
 
 
 const App = () => {
   return (
     <>
     <BrowserRouter>
+    <CartProvider>
     <Navbar/>
 
     <Routes>
-      <Route path='/' element={<Home/>}/>
-      <Route path='/contact' element={<Contact/>}/>
-      <Route path='/products' element={<Products/>}/>
-      <Route path='/item-detail/:id' element={<ItemDetailContainer/>}/>
-      <Route path="/cart" element={<Cart/>} />
-      <Route path="*" element={<NotFound/>} />
-    </Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/contact' element={<Contact />} />
+
+          <Route path="/products" element={<Navigate to="/products/todos" />} />
+          <Route path='/products/:categoryId' element={<Products />} />
+
+          <Route path='/item-detail/:id' element={<ItemDetailContainer />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+
     <ChatWidget />
     <Footer/>
+    </CartProvider>
     </BrowserRouter>
     </>
   )

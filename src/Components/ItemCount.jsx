@@ -1,9 +1,6 @@
-import { useState } from 'react';
-import Button from './Button';
+import Button from "./Button";
 
-const ItemCount = () => {
-    const [count, setCount] = useState(0);
-
+const ItemCount = ({ count, setCount }) => {
     const increment = () => setCount(count + 1);
     const decrement = () => {
         if (count > 0) setCount(count - 1);
