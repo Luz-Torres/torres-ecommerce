@@ -12,8 +12,11 @@ import ChatWidget from './Components/ChatWidget';
 import ItemDetailContainer from "./Components/ItemDetailContainer";
 import { CartProvider } from "./Context/CartContext";
 
+import { createFirebaseApp } from "./config/firebase";
 
 const App = () => {
+
+  createFirebaseApp()
   return (
     <>
     <BrowserRouter>

@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom'; // 👈 se agrega useNavigate
 import { getProductById } from '../utils/getProducts';
 import Loader from './Loader';
 import Layout from './Layout/Layout';
 import Button from './Button';
 import ItemCount from './ItemCount';
-import { useCart } from '../Context/CartContext'; 
+import { useCart } from '../Context/CartContext';
 
 const ItemDetail = () => {
     const { id } = useParams();
+    const navigate = useNavigate(); // 👈 hook de navegación
     const [product, setProduct] = useState();
-    const [quantity, setQuantity] = useState(1); 
-
-    const { addToCart } = useCart(); 
+    const [quantity, setQuantity] = useState(1);
+    const { addToCart } = useCart();
 
     useEffect(() => {
         getProductById(id)
@@ -36,39 +36,41 @@ const ItemDetail = () => {
 
     return (
         <Layout className="h-[83vh]">
-            <main className="flex justify-center p-6">
-                <article
-                    role="dialog"
-                    aria-modal="true"
-                    className="bg-slate-800 shadow-xl rounded-xl p-6 w-80 sm:w-96 mb-3 animate-fade-in text-white"
+            <main className=" flex flex-col items-center p-6 text-center">
+                <Button
+                    onClick={() => navigate(-1)}
+                    className="self-start mb-4 px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded"
                 >
-                    <figure className="mb-4 rounded-lg overflow-hidden">
+                    Volver
+                </Button>
+
+                <article className="bg-slate-800 shadow-xl rounded-xl p-6 w-full max-w-3xl animate-fade-in text-white flex flex-col md:flex-row gap-6">
+                    <figure className="md:w-1/2">
                         <img
                             src={image}
                             alt={name}
-                            className="w-full h-48 object-cover"
+                            className="w-full h-64 object-cover rounded"
                         />
                     </figure>
 
-                    <header className="mb-3">
-                        <h1 className="text-xl font-bold">{name}</h1>
-                    </header>
+                    <div className="flex flex-col justify-between md:w-1/2">
+                        <header>
+                            <h1 className="text-2xl font-bold">{name}</h1>
+                            <p className="text-gray-300 mt-2">{description}</p>
+                        </header>
 
-                    <p className="text-gray-300 mb-5">{description}</p>
-
-                    <footer className="flex flex-col gap-4">
-                        <span className="text-2xl font-semibold text-green-400">${price}</span>
-
-                        <ItemCount count={quantity} setCount={setQuantity} />
-
-                        <Button
-                            aria-label={`Agregar ${name} al carrito`}
-                            className="w-full bg-green-600 hover:bg-green-700 transition"
-                            onClick={handleAddToCart}
-                        >
-                            Agregar al carrito
-                        </Button>
-                    </footer>
+                        <footer className="mt-4 flex flex-col gap-4">
+                            <span className="text-2xl font-semibold text-green-400">${price}</span>
+                            <ItemCount count={quantity} setCount={setQuantity} />
+                            <Button
+                                aria-label={`Agregar ${name} al carrito`}
+                                className="w-full bg-green-600 hover:bg-green-700 transition"
+                                onClick={handleAddToCart}
+                            >
+                                Agregar al carrito
+                            </Button>
+                        </footer>
+                    </div>
                 </article>
             </main>
         </Layout>

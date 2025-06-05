@@ -15,7 +15,7 @@ const Cart = () => {
 
     return (
         <Layout className="h-[83vh]">
-            <Background className="bg-gray-900 text-white p-6 rounded-lg">
+            <Background>
                 <h1 className="text-3xl font-bold mb-6">
                     {cart.length === 0 ? "Hasta el carrito está esperando que cobres." : "Carrito de compra"}
                 </h1>
